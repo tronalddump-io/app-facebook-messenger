@@ -254,7 +254,7 @@ public class TronaldDumpCallbackHandler extends AbstractCallbackHandler {
         if (tag != null) {
             List<String> tags = tagsCache.getTags();
             if (tags.contains(tag)) {
-                textMessage = tronaldClient.getRandomQuote(tag).getValue();
+                textMessage = tronaldClient.getRandomQuote(tagsCache.getTag(tag)).getValue();
             } else {
                 textMessage = format("I said so many stupid things but there is no tag '%s' yet. Type 'tags' to see available tags.", tag);
             }
