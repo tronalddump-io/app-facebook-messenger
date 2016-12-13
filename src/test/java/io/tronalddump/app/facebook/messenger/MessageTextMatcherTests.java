@@ -115,6 +115,8 @@ public class MessageTextMatcherTests {
         assertThat(matcher.match("hi, tell me a quote tagged hillary clinton").group("tag"), is(equalTo("hillary clinton")));
         assertThat(matcher.match("hi, tell me a quote tagged with hillary clinton").pattern(), is(sameInstance(PATTERN_RANDOM_QUOTE_WITH_TAG)));
         assertThat(matcher.match("hi, tell me a quote tagged with hillary clinton").group("tag"), is(equalTo("hillary clinton")));
+        assertThat(matcher.match("hi, tell me a quote about hillary clinton").pattern(), is(sameInstance(PATTERN_RANDOM_QUOTE_WITH_TAG)));
+        assertThat(matcher.match("hi, tell me a quote about hillary clinton").group("tag"), is(equalTo("hillary clinton")));
     }
 
     @Test
@@ -125,6 +127,8 @@ public class MessageTextMatcherTests {
         assertThat(matcher.match("search quote with money").group("query"), is(equalTo("money")));
         assertThat(matcher.match("hi, find me a quote with money").pattern(), is(sameInstance(PATTERN_SEARCH_QUOTE)));
         assertThat(matcher.match("hi, find me a quote with money").group("query"), is(equalTo("money")));
+        assertThat(matcher.match("hi, find me a quote about money").pattern(), is(sameInstance(PATTERN_SEARCH_QUOTE)));
+        assertThat(matcher.match("hi, find me a quote about money").group("query"), is(equalTo("money")));
     }
 
     @Test

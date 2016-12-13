@@ -44,9 +44,9 @@ public class MessageTextMatcher {
 
     public static final Pattern PATTERN_RANDOM_QUOTE = compilePattern("(.* )?quote(.*)?");
 
-    public static final Pattern PATTERN_RANDOM_QUOTE_WITH_TAG = compilePattern("(.* )?quote (.* )?(tag|tagged with|tagged) (?<tag>.*)");
+    public static final Pattern PATTERN_RANDOM_QUOTE_WITH_TAG = compilePattern("(.* )?quote (.* )?(about|tag|tagged with|tagged) (?<tag>.*)");
 
-    public static final Pattern PATTERN_SEARCH_QUOTE = compilePattern("(.* )?(search|find) (.* )?quote (with|containing) (?<query>.*)");
+    public static final Pattern PATTERN_SEARCH_QUOTE = compilePattern("(.* )?(search|find) (.* )?quote (about|with|containing) (?<query>.*)");
 
     public static final Pattern PATTERN_ANOTHER_QUOTE = compilePattern("(.* )?(another|again)(.*)?");
 
