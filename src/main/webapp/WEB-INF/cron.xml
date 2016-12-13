@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+    <cron>
+        <url>/heartbeat</url>
+        <description>Heartbeat</description>
+        <schedule>every 5 minutes</schedule>
+        <retry-parameters>
+            <min-backoff-seconds>10</min-backoff-seconds>
+            <max-doublings>5</max-doublings>
+        </retry-parameters>
+    </cron>
+</cronentries>

@@ -1,0 +1,84 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "com.google.appengine:gradle-appengine-plugin:1.9.48"
+        classpath "nu.studer:gradle-credentials-plugin:1.0.1"
+    }
+}
+
+ext {
+    appengineVersion = "1.9.48"
+    commonsCollectionVersion = "4.1"
+    commonsLangVersion = "3.4"
+    junitVersion = "4.12"
+    mockitoVersion = "1.10.19"
+    restfbmessengerVersion = "1.1.0"
+    servletVersion = "2.5"
+    tronalddumpVersion = "1.0.0"
+}
+
+description = "Tronald Dump IO App for Facebook Messenger"
+
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "war"
+apply plugin: "appengine"
+apply plugin: "nu.studer.credentials"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    jcenter()
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    appengineSdk "com.google.appengine:appengine-java-sdk:${appengineVersion}"
+    compile "com.github.marsbits.restfbmessenger:restfbmessenger-core:${restfbmessengerVersion}"
+    compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
+    compile "io.tronalddump:client-java:${tronalddumpVersion}"
+    compile "org.apache.commons:commons-collections4:${commonsCollectionVersion}"
+    compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
+    providedCompile "javax.servlet:servlet-api:${servletVersion}"
+    testCompile "junit:junit:${junitVersion}"
+    testCompile "org.mockito:mockito-core:${mockitoVersion}"
+}
+
+appengine {
+    disableUpdateCheck = true
+    downloadSdk = true
+    httpPort = 8088
+    appcfg {
+        noCookies = true
+        oauth2 = true
+    }
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+war {
+    filesMatching("**/appengine-web.xml") {
+        expand([
+            "appengineAppId": "tronalddump-io-fb-messenger",
+            "facebookVerifyToken": credentials.tronalddumpIoVerifyToken,
+            "facebookAccessToken": credentials.tronalddumpIoAccessToken,
+            "facebookAppSecret": credentials.tronalddumpIoAppSecret
+        ])
+    }
+}
+
+task wrapper(type: Wrapper) {
+    description = "Generates gradlew[.bat] scripts."
+    gradleVersion = "3.2.1"
+}
