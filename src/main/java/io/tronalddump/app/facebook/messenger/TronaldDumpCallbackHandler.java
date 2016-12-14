@@ -315,7 +315,6 @@ public class TronaldDumpCallbackHandler extends AbstractCallbackHandler {
                         + "\n  • Tell me a quote tagged with hillary clinton"
                         + "\n  • Search quote containing money"
                         + "\n  • List available tags"
-                        + "\n  • Are you stupid"
                         + "\n"
                         + "\nOr choose a command below.");
         buttonTemplate.addButton(new PostbackButton("Random Quote", PAYLOAD_RANDOM_QUOTE));
