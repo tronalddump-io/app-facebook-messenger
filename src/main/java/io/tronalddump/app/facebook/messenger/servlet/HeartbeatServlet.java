@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.tronalddump.app.facebook.messenger;
+package io.tronalddump.app.facebook.messenger.servlet;
 
 import java.io.IOException;
 import java.util.logging.Logger;

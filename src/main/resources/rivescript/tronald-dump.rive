@@ -1,0 +1,79 @@
+! version = 2.0
+
+// ----------------------------------------------------------------------------
+// -- NOTES -------------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
+// * Underscores `_` need to be escaped `\_` as a underscore in RiveScript is a letter wildcard.
+// * Quick replies or buttons should be provided as <title>=<payload> pairs. For example: Title 1=PAYLOAD_1, Title 2=PAYLOAD_2
+
+// ----------------------------------------------------------------------------
+// -- POSTBACKS ---------------------------------------------------------------
+// ----------------------------------------------------------------------------
+
++ GET\_STARTED
+- Hi, what would you like to hear?
+^ QUICK_REPLIES: Random Quote=RANDOM_QUOTE, Tags=TAGS
+
+// + HELP
+// 'HELP' postback is already matched by '[*] help [*]' trigger
+
+// + TAGS
+// 'TAGS' postback is already matched by '[*] tags [*]' trigger
+
++ TAGS\_MORE\_#
+- Choose a tag:
+^ QUICK_REPLIES: <call>tags <star></call>
+
++ RANDOM\_QUOTE
+- <call>randomquote</call>
+
++ RANDOM\_QUOTE\_WITH\_TAG\_*
+- <call>randomquote "<star>"</call>
+
+// ----------------------------------------------------------------------------
+// -- TEXT MESSAGES -----------------------------------------------------------
+// ----------------------------------------------------------------------------
+
++ (hi|hey|hello|howdy|good day)
+- Hi there!
+
++ [*] your name [*]
+- Donald Trump is the name - the most stupid president ever!
+
++ [*] how are you [*]
+- I'm great!
+- I'm doing great!
+
++ [tell me a|tell me|tell] quote
+- <call>randomquote</call>
+
++ [tell me|tell me|tell] (another|again|more)
+- <call>randomquote</call>
+
++ [tell me a|tell me|tell] quote [about|tag|tagged with|tagged|with tag|with] *
+- <call>randomquote "<star>"</call>
+
++ (search|find) [me a|a] quote [with|containing] *
+- <call>searchquote "<star2>"</call>
+
++ (lol|funny|hilarious|laughing|laughing out loud)
+- I'm laughing my ass off!
+
++ [*] help [*]
+- Hi there. I can tell you random quotes of Donald Trump. Ask me things like the following:
+^ \n
+^ \n  - Tell me a quote
+^ \n  - Tell me a quote tagged with hillary clinton
+^ \n  - Search quote containing money
+^ \n  - List available tags
+^ \n
+^ \nOr choose a command below.
+^ BUTTONS: Random Quote=RANDOM_QUOTE, Tags=TAGS
+
++ [*] tags [*]
+- Choose a tag:
+^ QUICK_REPLIES: <call>tags 1</call>
+
++ *
+- OK! Ask me something else or type 'help'.

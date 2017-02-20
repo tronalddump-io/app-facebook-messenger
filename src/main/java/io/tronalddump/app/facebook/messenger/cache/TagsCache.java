@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package io.tronalddump.app.facebook.messenger;
+package io.tronalddump.app.facebook.messenger.cache;
 
+import io.tronalddump.client.TronaldClient;
 import org.apache.commons.collections4.ListUtils;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import io.tronalddump.client.TronaldClient;
-
 import static java.lang.String.format;
+import static java.util.Objects.requireNonNull;
 
 /**
  * The Tronald Dump IO Tags Cache.
@@ -35,19 +35,18 @@ public class TagsCache {
 
     private static final Logger logger = Logger.getLogger(TagsCache.class.getName());
 
-    private static final long DEFAULR_REFRESH_INTERVAL = TimeUnit.DAYS.toMillis(1);
-
-    private TronaldClient tronaldClient = new TronaldClient();
+    private final TronaldClient tronaldClient;
 
     private List<String> tags;
     private long refreshInterval;
     private long refreshTimestamp = 0;
 
-    public TagsCache() {
-        this(DEFAULR_REFRESH_INTERVAL);
+    public TagsCache(final TronaldClient tronaldClient) {
+        this(tronaldClient, TimeUnit.DAYS.toMillis(1));
     }
 
-    public TagsCache(long refreshInterval) {
+    public TagsCache(final TronaldClient tronaldClient, long refreshInterval) {
+        this.tronaldClient = requireNonNull(tronaldClient, "'tronaldClient' must not be null");
         this.refreshInterval = refreshInterval;
     }
 

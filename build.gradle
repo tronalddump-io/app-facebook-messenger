@@ -14,11 +14,15 @@ ext {
     appengineVersion = "1.9.49"
     commonsCollectionVersion = "4.1"
     commonsLangVersion = "3.5"
+    guiceVersion = "4.1.0"
+    hamcrestVersion = "1.3"
     junitVersion = "4.12"
     mockitoVersion = "1.10.19"
     restfbmessengerVersion = "1.2.0"
+    rivescriptVersion = "0.8.1"
     servletVersion = "2.5"
     tronalddumpVersion = "1.0.0"
+    slf4jVersion = "1.7.22"
 }
 
 description = "Tronald Dump IO App for Facebook Messenger"
@@ -42,11 +46,17 @@ dependencies {
     appengineSdk "com.google.appengine:appengine-java-sdk:${appengineVersion}"
     compile "com.github.marsbits.restfbmessenger:restfbmessenger-core:${restfbmessengerVersion}"
     compile "com.google.appengine:appengine-api-1.0-sdk:${appengineVersion}"
+    compile "com.google.inject:guice:${guiceVersion}"
+    compile "com.google.inject.extensions:guice-servlet:${guiceVersion}"
+    compile "com.rivescript:rivescript-core:${rivescriptVersion}"
     compile "io.tronalddump:client-java:${tronalddumpVersion}"
     compile "org.apache.commons:commons-collections4:${commonsCollectionVersion}"
     compile "org.apache.commons:commons-lang3:${commonsLangVersion}"
+    compile "org.slf4j:slf4j-jdk14:${slf4jVersion}"
     providedCompile "javax.servlet:servlet-api:${servletVersion}"
     testCompile "junit:junit:${junitVersion}"
+    testCompile("org.hamcrest:hamcrest-core:${hamcrestVersion}")
+    testCompile("org.hamcrest:hamcrest-library:${hamcrestVersion}")
     testCompile "org.mockito:mockito-core:${mockitoVersion}"
 }
 

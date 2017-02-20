@@ -3,28 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-    <servlet>
-        <servlet-name>heartbeat</servlet-name>
-        <servlet-class>io.tronalddump.app.facebook.messenger.HeartbeatServlet</servlet-class>
-    </servlet>
+    <filter>
+        <filter-name>guiceFilter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
 
-    <servlet>
-        <servlet-name>webhook</servlet-name>
-        <servlet-class>com.github.marsbits.restfbmessenger.webhook.WebhookServlet</servlet-class>
-        <init-param>
-            <param-name>messengerProviderClass</param-name>
-            <param-value>io.tronalddump.app.facebook.messenger.TronaldDumpMessengerProvider</param-value>
-        </init-param>
-    </servlet>
+    <filter-mapping>
+        <filter-name>guiceFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-    <servlet-mapping>
-        <servlet-name>heartbeat</servlet-name>
-        <url-pattern>/heartbeat</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>webhook</servlet-name>
-        <url-pattern>/webhook</url-pattern>
-    </servlet-mapping>
+    <listener>
+        <listener-class>io.tronalddump.app.facebook.messenger.inject.TronaldDumpGuiceServletContextListener</listener-class>
+    </listener>
 
 </web-app>
